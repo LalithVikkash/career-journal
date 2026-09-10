@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Journal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+
+    <nav>
+        <h2>Career Journal</h2>
+        <a href="/">Home</a>
+        <a href="/add">Add Entry</a>
+    </nav>
+
+    <main>
+        <h1>My Learning Journey</h1>
+
+        <a href="/add">
+            <button>Add Learning Entry</button>
+        </a>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Total Entries</h3>
+                <p>{{ total_entries }}</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Completed</h3>
+                <p>{{ completed_entries }}</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>In Progress</h3>
+                <p>{{ in_progress_entries }}</p>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <form method="GET">
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search by title or skill..."
+                    value="{{ search }}"
+                >
+                <button type="submit">Search</button>
+                <a href="/">Clear</a>
+            </form>
+        </div>
+
+        <h2>Learning Entries</h2>
+
+        {% if entries %}
+            {% for entry in entries %}
+                <div class="entry">
+                    <h3>{{ entry[1] }}</h3>
+                    <p><strong>Skill:</strong> {{ entry[2] }}</p>
+                    <p>{{ entry[3] }}</p>
+                    <p><strong>Status:</strong> {{ entry[4] }}</p>
+
+                    <a href="/edit/{{ entry[0] }}">
+                        <button class="edit">Edit</button>
+                    </a>
+
+                    <a href="/delete/{{ entry[0] }}" class="delete-link">
+                        <button class="delete">Delete</button>
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No matching entries found.</p>
+        {% endif %}
+
+    </main>
+
+</body>
+</html>

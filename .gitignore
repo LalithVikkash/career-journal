@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+career_journal.db
+.venv/
+venv/

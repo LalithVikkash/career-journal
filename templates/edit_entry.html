@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Entry - Career Journal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <nav>
+        <h2>Career Journal</h2>
+        <a href="/">Home</a>
+        <a href="/add">Add Entry</a>
+    </nav>
+
+    <main>
+        <div class="form-container">
+            <h1>Edit Learning Entry</h1>
+
+            <form method="POST">
+
+                <label>Title</label>
+                <input type="text" name="title" value="{{ entry[1] }}" required>
+
+                <label>Skill</label>
+                <input type="text" name="skill" value="{{ entry[2] }}" required>
+
+                <label>Description</label>
+                <textarea name="description" required>{{ entry[3] }}</textarea>
+
+                <label>Status</label>
+                <select name="status">
+                    <option value="In Progress" {% if entry[4] == "In Progress" %}selected{% endif %}>In Progress</option>
+                    <option value="Completed" {% if entry[4] == "Completed" %}selected{% endif %}>Completed</option>
+                </select>
+
+                <button type="submit">Update Entry</button>
+
+            </form>
+
+            <a href="/">Back to Home</a>
+        </div>
+    </main>
+
+</body>
+</html>
